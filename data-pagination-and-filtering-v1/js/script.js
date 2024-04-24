@@ -105,3 +105,15 @@ const itemsPerPage = 9;
    searchButton.appendChild(searchImg);
 
    // Search Functionality
+
+   searchInput.addEventListener('keyup', e => {
+      const userInput = e.target.value.toLowerCase();
+      const studentName = document.querySelectorAll('.student-item h3');
+      studentName.forEach(name => {
+         if(name.textContent.includes(userInput)) {
+            console.log(name);
+         }
+      })
+   })
+
+   
