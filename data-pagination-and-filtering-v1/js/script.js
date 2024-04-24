@@ -52,22 +52,22 @@ const student_list = document.querySelector(".student-list");
             <button type="button">${i}</button>
           </li>
          `;
-         }
-
+         };
          link_list.insertAdjacentHTML('beforeend', button);
-      }
-      
-      link_list.addEventListener('click', (e) => {
-         const buttons = link_list.querySelectorAll('button');
-         buttons.forEach(btn => btn.classList.remove('active'));
+      };
+
+      const buttons = link_list.querySelectorAll('button');
+      buttons.forEach((button) => {
+         button.addEventListener('click', (e) => {
+            buttons.forEach(btn => btn.classList.remove('active'));
 
          if(e.target.tagName === 'BUTTON') {
             e.target.className = 'active';
          }
-
          showPage(list, e.target.textContent)
-      })
-   }
+         });
+      });
+   };
 
    // Call the showPage and addPagination functions
    showPage(data, 1);
@@ -105,14 +105,14 @@ const student_list = document.querySelector(".student-list");
    searchButton.appendChild(searchImg);
 
 
-   // Create no results found heading
+   // No results found heading created
 
    const noResults = document.createElement('p');
    noResults.textContent = 'No results found';
    student_list.insertAdjacentElement('beforebegin', noResults);
    noResults.style.display = 'none'
 
-   // Search Functionality
+   // Search Functionality Based On User Input
 
    searchInput.addEventListener('keyup', e => {
       const userInput = e.target.value.toLowerCase(); 
