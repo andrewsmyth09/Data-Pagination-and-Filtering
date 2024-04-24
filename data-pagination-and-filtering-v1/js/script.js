@@ -129,11 +129,17 @@ const student_list = document.querySelector(".student-list");
          
       });
 
-      if(visibleStudentItems.length < 1) {
+      if(visibleStudentItems.length === 0) {
          noResults.style.display = 'block';
       } 
 
       addPagination(visibleStudentItems);
+      
+      if(userInput.length === 0) {
+         noResults.style.display = 'none';
+         showPage(data, 1);
+         addPagination(data);
+      }
       
    });
 
