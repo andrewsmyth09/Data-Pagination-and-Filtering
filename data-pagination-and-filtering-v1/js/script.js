@@ -1,4 +1,5 @@
 const itemsPerPage = 9;
+const student_list = document.querySelector(".student-list");
 
    /*
       showPage - Function that displays a specific page of student cards
@@ -7,7 +8,6 @@ const itemsPerPage = 9;
    const showPage = (list, page) => {
    const startIndex = page * itemsPerPage - itemsPerPage;
    const endIndex = page * itemsPerPage;
-   const student_list = document.querySelector(".student-list");
    student_list.innerHTML = "";
 
    for (let i = 0; i < list.length; i++) {
@@ -104,16 +104,39 @@ const itemsPerPage = 9;
    searchImg.alt = 'Search icon';
    searchButton.appendChild(searchImg);
 
+
+   // Create no results found heading
+
+   const noResults = document.createElement('p');
+   noResults.textContent = 'No results found';
+   student_list.insertAdjacentElement('beforebegin', noResults);
+   noResults.style.display = 'none'
+
    // Search Functionality
 
    searchInput.addEventListener('keyup', e => {
-      const userInput = e.target.value.toLowerCase();
-      const studentName = document.querySelectorAll('.student-item h3');
-      studentName.forEach(name => {
-         if(name.textContent.includes(userInput)) {
-            console.log(name);
-         }
-      })
-   })
+      const userInput = e.target.value.toLowerCase(); 
+      const studentItems = document.querySelectorAll('.student-item');
+      let visibleStudentItems = [];
 
+      studentItems.forEach(item => {
+         const studentName = item.querySelector('h3').textContent.toLowerCase();
+         if (!studentName.includes(userInput)) {
+            item.remove();
+         } else {
+            visibleStudentItems.push(item);
+         } 
+         
+      });
+
+      if(visibleStudentItems.length < 1) {
+         noResults.style.display = 'block';
+      } 
+
+      addPagination(visibleStudentItems);
+      
+   });
+
+   
+   
    
