@@ -72,3 +72,36 @@ const itemsPerPage = 9;
    // Call the showPage and addPagination functions
    showPage(data, 1);
    addPagination(data);
+
+   /*
+      Requirements for extra credit
+   */
+
+   // Search box for the header tag
+
+   const header = document.querySelector('header');
+
+   const label = document.createElement('label');
+   label.setAttribute('for', 'search')
+   label.className = 'student-search';
+   header.appendChild(label);
+   
+   const span = document.createElement('span');
+   span.textContent = 'Search by name';
+   label.appendChild(span);
+
+   const searchInput = document.createElement('input');
+   searchInput.id = 'search';
+   searchInput.setAttribute('placeholder', 'Search by name...');
+   label.appendChild(searchInput);
+
+   const searchButton = document.createElement('button');
+   searchButton.setAttribute('type', 'button');
+   label.appendChild(searchButton);
+
+   const searchImg = document.createElement('img');
+   searchImg.src = 'img/icn-search.svg';
+   searchImg.alt = 'Search icon';
+   searchButton.appendChild(searchImg);
+
+   // Search Functionality
