@@ -4,7 +4,7 @@ const student_list = document.querySelector(".student-list");
    /*
       showPage - Function that displays a specific page of student cards
    */
-      
+   
    const showPage = (list, page) => {
    const startIndex = page * itemsPerPage - itemsPerPage;
    const endIndex = page * itemsPerPage;
@@ -116,33 +116,19 @@ const student_list = document.querySelector(".student-list");
 
    searchInput.addEventListener('keyup', e => {
       const userInput = e.target.value.toLowerCase(); 
-      const studentItems = document.querySelectorAll('.student-item');
-      let visibleStudentItems = [];
-
-      studentItems.forEach(item => {
-         const studentName = item.querySelector('h3').textContent.toLowerCase();
-         if (!studentName.includes(userInput)) {
-            item.remove();
-         } else {
-            visibleStudentItems.push(item);
-         } 
-         
+      student_list.innerHTML = ''; 
+  
+      const filteredData = data.filter(student => {
+          const fullName = `${student.name.first.toLowerCase()} ${student.name.last.toLowerCase()}`;
+          return fullName.includes(userInput);
       });
-
-      if(visibleStudentItems.length === 0) {
-         noResults.style.display = 'block';
-      } 
-
-      addPagination(visibleStudentItems);
-      
-      if(userInput.length === 0) {
-         noResults.style.display = 'none';
-         showPage(data, 1);
-         addPagination(data);
+  
+      if (filteredData.length === 0) {
+          noResults.style.display = 'block';
+          addPagination(filteredData);
+      } else {
+          noResults.style.display = 'none';
+          showPage(filteredData, 1);
+          addPagination(filteredData);
       }
-      
-   });
-
-   
-   
-   
+  });
